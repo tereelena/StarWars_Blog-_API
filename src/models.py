@@ -79,7 +79,7 @@ class Vehicle(db.Model):
             "vehicle_class":self.vehicle_class,
             "length":self.length,
             "passenger":self.passenger,
-            "manufacturer":self.manufacturer,
+            "manufacturer_id":self.manufacturer_id,
             "pilot_uid":self.pilot_uid
 
         }  
