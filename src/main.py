@@ -44,7 +44,17 @@ def get_all_people():
     all_person= Person.query.all()
     all_person= list(map(lambda x: x.serialize(),all_person))
     return jsonify(all_person), 200
+@app.route('/planet', methods=['GET']) 
+def get_all_planet():
+    all_planet= Planet.query.all()
+    all_planet= list(map(lambda x: x.serialize(),all_planet))
+    return jsonify(all_planet), 200
 
+@app.route('/vehicle', methods=['GET']) 
+def get_all_vehicle():
+    all_vehicle= Vehicle.query.all()
+    all_vehicle= list(map(lambda x: x.serialize(),all_vehicle))
+    return jsonify(all_vehicle), 200    
 
 
     

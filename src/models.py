@@ -21,20 +21,21 @@ class User(db.Model):
 class Person(db.Model):
     uid = db.Column(db.Integer, primary_key=True)
     name= db.Column(db.String(50), nullable=False)
+    homeworld_uid = db.Column(db.Integer, db.ForeignKey('planet.id'))
     height= db.Column(db.Integer)
     mass= db.Column(db.Integer)
-    gender= db.Column(db.String(1), nullable=False)
-    homeworld_uid = db.Column(db.Integer, db.ForeignKey('planet.id'))
-
+    gender= db.Column(db.String(1))
+    
     #el metodo serialize convierte el objeto en un diccionario
     def serialize(self):
         return {
             "uid": self.uid,
             "name": self.name,
+            "homeworld_uid":self.homeworld_uid,
             "height":self.height,
             "mass" : self.mass,
-            "gender": self.gender,
-            "homeworld_uid":self.homeworld_uid
+            "gender": self.gender
+            
 
 
         }
