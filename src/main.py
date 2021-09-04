@@ -8,9 +8,9 @@ from flask_swagger import swagger
 from flask_cors import CORS
 from utils import APIException, generate_sitemap
 from admin import setup_admin
-from models import db, User
+from models import db, User, Person, Planet, Vehicle, List_favorites
 #from models import Person
-
+# aca van las configuraciones iniciales de nuestro proyecto
 app = Flask(__name__)
 app.url_map.strict_slashes = False
 app.config['SQLALCHEMY_DATABASE_URI'] = os.environ.get('DB_CONNECTION_STRING')
@@ -19,6 +19,7 @@ MIGRATE = Migrate(app, db)
 db.init_app(app)
 CORS(app)
 setup_admin(app)
+#fin de configuraciones iniciales
 
 # Handle/serialize errors like a JSON object
 @app.errorhandler(APIException)
@@ -31,13 +32,22 @@ def sitemap():
     return generate_sitemap(app)
 
 @app.route('/user', methods=['GET'])
-def handle_hello():
+def get_all_user():
+    # esta varibale estoy consultando a la base de datos por todos los registros de la tabla users
+    all_users= User.query.all()
+    all_users= list(map(lambda x: x.serialize(),all_users))
+    return jsonify(all_users), 200
+  
+@app.route('/person', methods=['GET'])  
+def get_all_people():
+    #esta variable esta consultando a la base de datos por todois los registro de la tabla personajes    
+    all_person= Person.query.all()
+    all_person= list(map(lambda x: x.serialize(),all_person))
+    return jsonify(all_person), 200
 
-    response_body = {
-        "msg": "Hello, this is your GET /user response "
-    }
 
-    return jsonify(response_body), 200
+
+    
 
 # this only runs if `$ python src/main.py` is executed
 if __name__ == '__main__':
