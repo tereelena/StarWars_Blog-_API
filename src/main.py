@@ -37,6 +37,17 @@ def get_all_user():
     all_users= User.query.all()
     all_users= list(map(lambda x: x.serialize(),all_users))
     return jsonify(all_users), 200
+"""
+    Single user
+""" 
+@app.route('/user/<int:user_id>', methods=['GET'])  
+def get_single_user(user_id):
+    # esta variable esta consultando a la BD por un usuario en especifico
+    oneuser= User.query.get(user_id)
+    return jsonify(oneuser.serialize()), 200    
+"""
+    All person
+""" 
   
 @app.route('/person', methods=['GET'])  
 def get_all_people():
@@ -44,11 +55,39 @@ def get_all_people():
     all_person= Person.query.all()
     all_person= list(map(lambda x: x.serialize(),all_person))
     return jsonify(all_person), 200
+
+"""
+    Single person
+""" 
+@app.route('/person/<int:person_id>', methods=['GET'])  
+def get_single_people(person_id):
+    # esta variable esta consultando a la BD por un personaje en especifico
+    oneperson= Person.query.get(person_id)
+    return jsonify(oneperson.serialize()), 200
+
+"""
+    All planets
+    
+"""     
+
 @app.route('/planet', methods=['GET']) 
 def get_all_planet():
     all_planet= Planet.query.all()
     all_planet= list(map(lambda x: x.serialize(),all_planet))
     return jsonify(all_planet), 200
+
+"""
+    Single planet
+""" 
+@app.route('/planet/<int:planet_id>', methods=['GET'])  
+def get_single_planet(planet_id):
+    # esta variable esta consultando a la BD por un planeta en especifico
+    oneplanet= Planet.query.get(planet_id)
+    return jsonify(oneplanet.serialize()), 200
+
+"""
+    All vehicles
+"""     
 
 @app.route('/vehicle', methods=['GET']) 
 def get_all_vehicle():
@@ -56,6 +95,13 @@ def get_all_vehicle():
     all_vehicle= list(map(lambda x: x.serialize(),all_vehicle))
     return jsonify(all_vehicle), 200    
 
+"""
+    All favorite´s oneuser
+""" 
+@app.route('/list_favorites/<int:user_id>', methods=['GET']) 
+def get_all_favorites(user_id):
+    all_favorites= List_favorites.query.get(user_id)
+    return jsonify(all_favorites.serialize()), 200
 
     
 
